@@ -59,7 +59,7 @@ exports.getAllUsers = async (req, res) => {
 };
 
 // login user
-exports.loginController = (req, res) => {
+exports.loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     // validation
@@ -69,7 +69,26 @@ exports.loginController = (req, res) => {
         message: "Please Provide Eamil and password",
       });
     }
-    const user = await userModel.findOne({email})
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(200).send({
+        success: false,
+        message: "email is not registerd",
+      });
+    }
+    // password caking
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return req.status(401).send({
+        success: false,
+        message: "Invalid username of password",
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: "login successfully",
+      user,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).send({
