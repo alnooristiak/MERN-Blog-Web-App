@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const connectDB = require("./config/db");
+const userRoutes = require("./routes/userRouts");
 
 // Port
 const PORT = process.env.PORT || 8080;
@@ -20,16 +21,15 @@ const app = express();
 // middlewares
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev')); 
+app.use(morgan("dev"));
 
 // routes
-app.get('/', (req, res) => {
-    res.status(200).send({
-        "message": "Node Server"
-    })
-})
+app.get("/api/v1/user", userRoutes);
 
-// listen 
-app.listen(PORT, () =>{
-    console.log(`Server Running On ${process.env.DEV_MODE} Mode Port On ${PORT}`.bgCyan.white)
-})
+// listen
+app.listen(PORT, () => {
+  console.log(
+    `Server Running On ${process.env.DEV_MODE} Mode Port On ${PORT}`.bgCyan
+      .white
+  );
+});
