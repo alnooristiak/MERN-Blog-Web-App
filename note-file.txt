@@ -1,0 +1,4 @@
+mongodb+srv://istiakDeveloper:<password>@blog-web-app.pliqrli.mongodb.net/
+
+
+npm run server

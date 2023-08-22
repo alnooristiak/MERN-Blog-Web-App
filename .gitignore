@@ -1,0 +1,43 @@
+# Node.js / Express
+node_modules/
+dist/
+logs/
+npm-debug.log*
+
+# React
+build/
+node_modules/
+.DS_Store
+*.log
+
+# Environment variables
+.env
+
+# IDE and Editor-specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Miscellaneous
+*.swp
+Thumbs.db
+.DS_Store
+
+# Dependencies
+/.pnp
+.pnp.js
+
+# TypeScript
+*.tsbuildinfo
+
+# Yarn
+/.pnp
+.yarn
+
+# Testing
+/coverage
+
+# Production
+*.log
+build/
