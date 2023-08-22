@@ -14,7 +14,7 @@ router.get("/all-users", getAllUsers);
 // create all user -- post
 router.post("/register", registerController);
 
-// login all user -- post
+// login user's -- post
 router.post("/login", loginController);
 
 module.exports = router;
