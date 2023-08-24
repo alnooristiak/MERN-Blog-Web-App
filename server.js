@@ -7,7 +7,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const connectDB = require("./config/db");
+
+// route imports
 const userRoutes = require("./routes/userRouts");
+const blogRoutes = require("./routes/blogRoutes");
 
 // Port
 const PORT = process.env.PORT || 8080;
@@ -24,7 +27,8 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // routes
-app.get("/api/v1/user", userRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/blog", blogRoutes);
 
 // listen
 app.listen(PORT, () => {

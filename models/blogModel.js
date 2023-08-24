@@ -4,15 +4,20 @@ const blogSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: [true, "Title is require"],
+      required: [true, "Title is require"],
     },
     description: {
-      title: String,
-      require: [true, "description is required"],
+      type: String,
+      required: [true, "description is required"],
     },
     image: {
-      title: String,
-      require: [true, "image is require"],
+      type: String,
+      required: [true, "image is require"],
+    },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "user id is require"],
     },
   },
   { timestamps: true }
@@ -20,4 +25,4 @@ const blogSchema = new mongoose.Schema(
 
 const blogModel = mongoose.model("Blog", blogSchema);
 
-model.exports = blogModel;
+module.exports = blogModel;

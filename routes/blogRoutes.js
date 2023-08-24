@@ -1,4 +1,11 @@
 const express = require("express");
+const {
+  getAllBlogsController,
+  createBlogController,
+  updateBlogController,
+  deleteBlogController,
+  deleteBlogByIdController,
+} = require("../controllers/blogController");
 
 // router object
 const router = express.Router();
@@ -13,10 +20,10 @@ router.post("/create-blog", createBlogController);
 // update blog -- put
 router.put("/update-blog/:id", updateBlogController);
 
+// delete single blog -- delete
+router.get("/get-blog/:id", deleteBlogByIdController);
+
 // delete blog -- delete
 router.delete("/delete-blog/:id", deleteBlogController);
-
-// delete single blog -- delete
-router.delete("/delete-blog/:id", deleteBlogByIdController);
 
 module.exports = router;

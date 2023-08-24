@@ -20,7 +20,7 @@ exports.registerController = async (req, res) => {
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    password = hashedPassword;
+    // password = hashedPassword;
 
     // save new user
     const user = new userModel({ username, email, password: hashedPassword });
