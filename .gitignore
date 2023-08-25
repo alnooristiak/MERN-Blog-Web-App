@@ -4,6 +4,9 @@ dist/
 logs/
 npm-debug.log*
 
+# ignore client folder node_modules
+client/node_modules/
+
 # React
 build/
 node_modules/
