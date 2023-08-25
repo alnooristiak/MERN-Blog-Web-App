@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 // ("use client");
 
 import { Dropdown, Navbar, Avatar, Button } from "flowbite-react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const isLogin = useSelector((state) => state.isLogin);
+  console.log(isLogin);
   return (
     <>
       <Navbar fluid rounded className="bg-emerald-300">
@@ -12,7 +15,7 @@ const Header = () => {
           <img
             alt="Flowbite React Logo"
             className="mr-3 h-6 sm:h-9"
-            src="/favicon.svg"
+            src="https://lh5.googleusercontent.com/-jcDwHSP0tQk/AAAAAAAAAAI/AAAAAAAAAAA/ktMOD91YmDQ/s55-w44-h44-p-k-no-ns-nd/photo.jpg"
           />
           <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
             Flowbite React
