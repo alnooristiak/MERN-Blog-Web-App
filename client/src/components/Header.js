@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // ("use client");
 
 import { Dropdown, Navbar, Avatar, Button } from "flowbite-react";
@@ -7,7 +8,7 @@ const Header = () => {
   return (
     <>
       <Navbar fluid rounded className="bg-emerald-300">
-        <Navbar.Brand href="https://flowbite-react.com">
+        <Navbar.Brand LinkComponent={Link} to="/">
           <img
             alt="Flowbite React Logo"
             className="mr-3 h-6 sm:h-9"
@@ -44,12 +45,20 @@ const Header = () => {
         </div>
         <Navbar.Collapse>
           <Navbar.Link active href="#">
-            <p>Home</p>
+            <Link to="/">Blog</Link>
           </Navbar.Link>
-          <Navbar.Link href="#">About</Navbar.Link>
-          <Navbar.Link href="#">Services</Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Contact</Navbar.Link>
+          <Navbar.Link href="#">
+            <Link to="/my-blogs">My Blog</Link>
+          </Navbar.Link>
+
+          <Navbar.Link>
+            <Link to="/login">Login</Link>
+          </Navbar.Link>
+          <Navbar.Link href="#">
+            <Link to="/register">Register</Link>
+          </Navbar.Link>
+          <Navbar.Link href="#">Logout</Navbar.Link>
+          {/* <Navbar.Link href="#">Contact</Navbar.Link> */}
         </Navbar.Collapse>
       </Navbar>
     </>
