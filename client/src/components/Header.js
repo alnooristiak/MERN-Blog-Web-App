@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const isLogin = useSelector((state) => state.isLogin);
-  console.log(isLogin);
+  // console.log(isLogin);
   return (
     <>
       <Navbar fluid rounded className="bg-emerald-300">
@@ -22,45 +22,58 @@ const Header = () => {
           </span>
         </Navbar.Brand>
         <div className="flex md:order-2">
-          <Dropdown
-            inline
-            label={
-              <Avatar
-                alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
-              />
-            }
-          >
-            <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
-              <span className="block truncate text-sm font-medium">
-                name@flowbite.com
-              </span>
-            </Dropdown.Header>
-            <Button>Dashboard</Button>
-            <Button>Settings</Button>
-            <Button>Earnings</Button>
-            <Dropdown.Divider />
-            <Button>Sign out</Button>
-          </Dropdown>
+          {isLogin && (
+            <Dropdown
+              inline
+              label={
+                <Avatar
+                  alt="User settings"
+                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                  rounded
+                />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">Bonnie Green</span>
+                <span className="block truncate text-sm font-medium">
+                  name@flowbite.com
+                </span>
+              </Dropdown.Header>
+              <Button>Dashboard</Button>
+              <Button>Settings</Button>
+              <Button>Earnings</Button>
+              <Dropdown.Divider />
+              <Button>Sign out</Button>
+            </Dropdown>
+          )}
           <Navbar.Toggle />
         </div>
         <Navbar.Collapse>
-          <Navbar.Link active href="#">
-            <Link to="/">Blog</Link>
-          </Navbar.Link>
-          <Navbar.Link href="#">
-            <Link to="/my-blogs">My Blog</Link>
-          </Navbar.Link>
-
-          <Navbar.Link>
-            <Link to="/login">Login</Link>
-          </Navbar.Link>
-          <Navbar.Link href="#">
-            <Link to="/register">Register</Link>
-          </Navbar.Link>
-          <Navbar.Link href="#">Logout</Navbar.Link>
+          {isLogin && (
+            <>
+              <Navbar.Link active href="#">
+                <Link to="/">Blogs</Link>
+              </Navbar.Link>
+              <Navbar.Link href="#">
+                <Link to="/my-blogs">My Blog</Link>
+              </Navbar.Link>
+            </>
+          )}
+          {!isLogin && (
+            <>
+              <Navbar.Link>
+                <Link to="/login">Login</Link>
+              </Navbar.Link>
+              <Navbar.Link href="#">
+                <Link to="/register">Register</Link>
+              </Navbar.Link>
+            </>
+          )}
+          {isLogin && (
+            <>
+              <Navbar.Link href="#">Logout</Navbar.Link>
+            </>
+          )}
           {/* <Navbar.Link href="#">Contact</Navbar.Link> */}
         </Navbar.Collapse>
       </Navbar>

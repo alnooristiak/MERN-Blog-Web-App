@@ -63,8 +63,8 @@ exports.loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     // validation
-    if (!email || password) {
-      return res.Status(401).sent({
+    if (!email || !password) {
+      return res.status(401).sent({
         success: false,
         message: "Please Provide Eamil and password",
       });
