@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { authActions } from "../redux/store";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState({
     email: "",
@@ -27,6 +30,8 @@ const Login = () => {
         password: inputs.password,
       });
       if (data.success) {
+        localStorage.setItem("userId", data?.user_id);
+        dispatch(authActions.login());
         alert("User logged in successfully");
         navigate("/"); // Redirect to the dashboard page
       } else {
@@ -34,7 +39,7 @@ const Login = () => {
       }
     } catch (error) {
       setError("An error occurred. Please try again later."); // Set error message
-      console.log(error);
+      console.error(error);
     }
   };
 

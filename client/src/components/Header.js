@@ -1,11 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // ("use client");
 
 import { Dropdown, Navbar, Avatar, Button } from "flowbite-react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../redux/store";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    try {
+      dispatch(authActions.logout());
+      alert("logout Successfully");
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const isLogin = useSelector((state) => state.isLogin);
   // console.log(isLogin);
   return (
@@ -71,7 +84,9 @@ const Header = () => {
           )}
           {isLogin && (
             <>
-              <Navbar.Link href="#">Logout</Navbar.Link>
+              <Link to="/login" onClick={handleLogout}>
+                Logout
+              </Link>
             </>
           )}
           {/* <Navbar.Link href="#">Contact</Navbar.Link> */}

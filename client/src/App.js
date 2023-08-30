@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import UsersBlogs from "./pages/UsersBlogs";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Blog />} />
-            <Route path="/my-blogs" element={<Blog />} />
+            <Route path="/my-blogs" element={<UsersBlogs />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
           </Routes>
