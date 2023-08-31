@@ -70,6 +70,9 @@ const Header = () => {
               <Navbar.Link href="#">
                 <Link to="/my-blogs">My Blog</Link>
               </Navbar.Link>
+              <Navbar.Link href="#">
+                <Link to="/create-blog">Create Blog</Link>
+              </Navbar.Link>
             </>
           )}
           {!isLogin && (

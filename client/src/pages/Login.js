@@ -30,7 +30,7 @@ const Login = () => {
         password: inputs.password,
       });
       if (data.success) {
-        localStorage.setItem("userId", data?.user_id);
+        localStorage.setItem("userId", data?.user._id);
         dispatch(authActions.login());
         alert("User logged in successfully");
         navigate("/"); // Redirect to the dashboard page
