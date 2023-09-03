@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Dropdown, Navbar, Avatar, Button } from "flowbite-react";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../redux/store";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,13 +14,18 @@ const Header = () => {
   const handleLogout = () => {
     try {
       dispatch(authActions.logout());
-      alert("logout Successfully");
+      toast.success("logout Successfully");
       navigate("/login");
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }
   };
-  const isLogin = useSelector((state) => state.isLogin);
+
+  let isLogin = useSelector((state) => state.isLogin);
+
+  isLogin = isLogin || localStorage.getItem("userId");
+
   // console.log(isLogin);
   return (
     <>

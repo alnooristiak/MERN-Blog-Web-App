@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { authActions } from "../redux/store";
-
+import toast from "react-hot-toast";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Login = () => {
       if (data.success) {
         localStorage.setItem("userId", data?.user._id);
         dispatch(authActions.login());
-        alert("User logged in successfully");
+        toast.success("User logged in successfully");
         navigate("/"); // Redirect to the dashboard page
       } else {
         setError("Login failed. Please check your credentials."); // Set error message

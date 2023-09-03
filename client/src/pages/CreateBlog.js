@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const CreateBlog = () => {
   const id = localStorage.getItem("userId");
@@ -22,7 +23,7 @@ const CreateBlog = () => {
         user: id,
       });
       if (data?.success) {
-        alert("Blog created successfully");
+        toast.success("Blog created successfully");
         navigate("/my-blogs");
       }
     } catch (error) {

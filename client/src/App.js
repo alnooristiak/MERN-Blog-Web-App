@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import UsersBlogs from "./pages/UsersBlogs";
 import CreateBlog from "./pages/CreateBlog";
 import BlogDetails from "./pages/BlogDetails";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Provider store={store}>
         <Router>
           <Header />
+          <Toaster />
           <Routes>
             <Route path="/" element={<Blog />} />
             <Route path="/my-blogs" element={<UsersBlogs />} />

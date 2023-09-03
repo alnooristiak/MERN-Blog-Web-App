@@ -3,12 +3,27 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
-const Card = ({ title, decription, image, username, time, id, isUser }) => {
+const Card = ({ title, description, image, username, time, id, isUser }) => {
   const navigate = useNavigate();
 
   const handleEdit = () => {
     navigate(`/blog-details/${id}`);
+  };
+
+  const handleDelite = async () => {
+    try {
+      const { data } = await axios.delete(`/api/v1/blog/delete-blog/${id}`);
+      if (data?.success) {
+        toast.success("blog Deleted");
+        // navigate("/my-blogs");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -24,7 +39,7 @@ const Card = ({ title, decription, image, username, time, id, isUser }) => {
             </h5>
           </a>
           <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {decription}
+            {description}
           </p>
           <div className="my-4">
             <span className="block">
@@ -59,7 +74,7 @@ const Card = ({ title, decription, image, username, time, id, isUser }) => {
           {isUser && (
             <div>
               <FontAwesomeIcon onClick={handleEdit} icon={faEdit} />
-              <FontAwesomeIcon icon={faTrash} />
+              <FontAwesomeIcon onClick={handleDelite} icon={faTrash} />
             </div>
           )}
         </div>

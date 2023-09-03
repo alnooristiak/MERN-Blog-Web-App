@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const BlogDetails = () => {
   const [blog, setBlog] = useState({});
@@ -50,7 +51,7 @@ const BlogDetails = () => {
         user: id,
       });
       if (data?.success) {
-        alert("Blog updated successfully");
+        toast.success("Blog updated successfully");
         navigate("/my-blogs");
       }
     } catch (error) {
