@@ -1,6 +1,16 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Card = ({ title, decription, image, username, time }) => {
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+
+const Card = ({ title, decription, image, username, time, id, isUser }) => {
+  const navigate = useNavigate();
+
+  const handleEdit = () => {
+    navigate(`/blog-details/${id}`);
+  };
+
   return (
     <>
       <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -45,6 +55,13 @@ const Card = ({ title, decription, image, username, time }) => {
               />
             </svg>
           </a>
+          {/* edit icon section */}
+          {isUser && (
+            <div>
+              <FontAwesomeIcon onClick={handleEdit} icon={faEdit} />
+              <FontAwesomeIcon icon={faTrash} />
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -1,40 +1,61 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const CreateBlog = () => {
-  const id = localStorage.getItem("userId");
+const BlogDetails = () => {
+  const [blog, setBlog] = useState({});
+  const id = useParams().id;
   const navigate = useNavigate();
 
-  const [inputs, setInputs] = useState({
-    title: "",
-    description: "",
-    image: "",
-  });
+  const [inputs, setInputs] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // get blog details
+  const getBlogDetails = async () => {
     try {
-      const { data } = await axios.post("/api/v1/blog/create-blog", {
-        title: inputs.title,
-        image: inputs.image,
-        description: inputs.description,
-        user: id,
-      });
+      const { data } = await axios.get(`/api/v1/blog/get-blog/${id}`);
       if (data?.success) {
-        alert("Blog created successfully");
-        navigate("/my-blogs");
+        setBlog(data?.blog);
+        setInputs({
+          title: data?.blog.title,
+          description: data?.blog.description,
+          image: data?.blog.image,
+        });
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  //   set blog and eidt blog in initial time
+  useEffect(() => {
+    getBlogDetails();
+  }, [id]);
+  // console.log(blog);
+
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.put(`/api/v1/blog/update-blog/${id}`, {
+        title: inputs.title,
+        description: inputs.description,
+        image: inputs.image,
+        user: id,
+      });
+      if (data?.success) {
+        alert("Blog updated successfully");
+        navigate("/my-blogs");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -69,6 +90,7 @@ const CreateBlog = () => {
               rows="10"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Write your Blog Description"
+              required
               name="description"
               value={inputs.description}
               onChange={handleChange}
@@ -95,11 +117,11 @@ const CreateBlog = () => {
           type="submit"
           className="text-white bg-green-600 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          UPDATE
+          update
         </button>
       </form>
     </>
   );
 };
 
-export default CreateBlog;
+export default BlogDetails;

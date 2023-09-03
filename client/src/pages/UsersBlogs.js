@@ -4,10 +4,11 @@ import Card from "../components/Card";
 
 const UsersBlogs = () => {
   const [blogs, setBlogs] = useState([]);
+
   const getUserBlogs = async () => {
     try {
       const id = localStorage.getItem("userId");
-      const { data } = await axios.get(`/api/v1/user-blog/${id}`);
+      const { data } = await axios.get(`/api/v1/blog/user-blog/${id}`);
       if (data?.success) {
         setBlogs(data?.userBlog.blogs);
       }
@@ -15,9 +16,11 @@ const UsersBlogs = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getUserBlogs();
   }, []);
+
   return (
     <div className="m-5">
       <div
@@ -27,6 +30,8 @@ const UsersBlogs = () => {
         {blogs && blogs.length > 0 ? (
           blogs.map((blog) => (
             <Card
+              id={blog._id}
+              isUser={true}
               title={blog.title}
               description={blog.description}
               image={blog.image}

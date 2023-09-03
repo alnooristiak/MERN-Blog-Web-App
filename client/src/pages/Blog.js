@@ -5,6 +5,7 @@ import Card from "../components/Card";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
+
   const getAllBlogs = async () => {
     try {
       const { data } = await axios.get("/api/v1/blog/all-blog");
@@ -27,10 +28,12 @@ const Blog = () => {
         {blogs &&
           blogs.map((blog) => (
             <Card
-              title={blog.title}
-              decription={blog.description}
-              image={blog.image}
-              username={blog.user.username}
+              id={blog?._id}
+              isUser={localStorage.getItem("userId") === blog?.user?._id}
+              title={blog?.title}
+              decription={blog?.description}
+              image={blog?.image}
+              username={blog?.user?.username}
               time={blog.createdAt}
             />
           ))}
